@@ -1,0 +1,18 @@
+server:
+  port:  8000
+spring:
+  application:
+    name: exchange-service
+  datasource:
+    url: jdbc:mysql://localhost/exchange-service
+    username: root
+    password: Aqws-908
+
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+eureka:
+  client:
+    service-url:
+      defaultZone:  http://localhost:8761/eureka
