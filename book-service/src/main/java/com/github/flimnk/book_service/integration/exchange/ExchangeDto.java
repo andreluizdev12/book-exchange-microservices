@@ -5,8 +5,8 @@ import java.math.BigDecimal;
 public record ExchangeDto(
          String from,
          String to,
-         BigDecimal conversionFactor,
-         BigDecimal convertedValue,
+         Double conversionFactor,
+         Double convertedValue,
          String envirolment
 ){
     @Override

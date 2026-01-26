@@ -7,7 +7,6 @@ spring:
     url: jdbc:mysql://localhost/book-service
     username: root
     password: Aqws-908
-
   jpa:
     properties:
       hibernate:
@@ -16,3 +15,29 @@ eureka:
   client:
     service-url:
       defaultZone:  http://localhost:8761/eureka
+
+resilience4j:
+  retry:
+    instances:
+      review-service:
+        maxAttempts: 3
+        waitDuration: 500ms
+  ratelimiter:
+    instances:
+      rate-teste:
+        limit-for-period: 2
+        limit-refresh-period: 10s
+
+  circuitbreaker:
+    instances:
+      exchange-circuit:
+        slidingWindowSize: 10
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10s
+
+springdoc:
+  api-docs:
+    path: /book/v3/api-docs
+  swagger-ui:
+    path: /book/swagger-ui
+  override-server-url: true

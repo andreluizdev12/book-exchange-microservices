@@ -1,6 +1,7 @@
 package com.github.flimnk.book_service.service;
 
-import com.github.flimnk.book_service.domain.book.dto.BookDto;
+import com.github.flimnk.book_service.controller.dto.BookDto;
+import com.github.flimnk.book_service.integration.exchange.ExchangeAdapter;
 import com.github.flimnk.book_service.integration.exchange.ExchangeProxy;
 import com.github.flimnk.book_service.repo.BookRepository;
 
@@ -17,7 +18,7 @@ public class BookService {
     private InstanceInformationService serverPort;
 
     @Autowired
-    private ExchangeProxy exchangeProxy;
+    private ExchangeAdapter exchangeAdapter;
 
 
     public BookDto getBook(Long id  , String currency){
@@ -25,7 +26,7 @@ public class BookService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST,"Book does with id: " +id+ "not exists "));
 
 
-        var exchage  = exchangeProxy.getExchange(book.getPrice(),"USD",currency);
+        var exchage  = exchangeAdapter.getExchange(book.getPrice(),"USD",currency);
         String templatePort = "Book-Port: " + serverPort.retrieveServerPort() + "////" +"Exchange-Port: " + exchage.envirolment();
         var dto = new BookDto(book.getAuthor(), book.getTitle(),book.getLaunchDate(),exchage.convertedValue() ,currency, templatePort);
         return  dto;

@@ -5,23 +5,35 @@ spring:
     name: api-gateway
 
 
-#  cloud:
-#    gateway:
-#      default-filters:
-#        - RemoveRequestHeader=Cookie
-#      routes:
-#        - id: book-service
-#          uri: lb://BOOK-SERVICE
-#          predicates:
-#            - Path=/api/book/**
-#
-#        - id: exchange-service
-#          uri: lb://EXCHANGE-SERVICE
-#          predicates:
-#            - Path=/api/exchange/**
+  cloud:
+    gateway:
+      default-filters:
+        - RemoveRequestHeader=Cookie
+      routes:
+        - id: book-service
+          uri: lb://BOOK-SERVICE
+          predicates:
+            - Path=/api/book/**
+          filters:
+            - StripPrefix=1
 
+        - id: exchange-service
+          uri: lb://EXCHANGE-SERVICE
+          predicates:
+            - Path=/api/exchange/**
+          filters:
+            - StripPrefix=1
 
-#eureka:
-#  client:
-#    service-url:
-#      defaultZone: http://localhost:8761/eureka
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+springdoc:
+  swagger-ui:
+    urls:
+      - name: book-service
+        url: /api/book/v3/api-docs
+      - name: exchange-service
+        url: /api/exchange/v3/api-docs
+

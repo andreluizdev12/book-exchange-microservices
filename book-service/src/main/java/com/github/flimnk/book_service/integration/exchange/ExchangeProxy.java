@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @FeignClient(name = "exchange-service")
 public interface ExchangeProxy {
-    @GetMapping(value = "/api/exchange/{amount}/{from}/{to}")
+    @GetMapping(value = "/exchange/{amount}/{from}/{to}")
     public ExchangeDto getExchange(
             @PathVariable("amount") Double amount,
             @PathVariable("from") String from,

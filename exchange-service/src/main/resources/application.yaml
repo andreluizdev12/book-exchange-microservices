@@ -7,7 +7,6 @@ spring:
     url: jdbc:mysql://localhost/exchange-service
     username: root
     password: Aqws-908
-
   jpa:
     properties:
       hibernate:
@@ -16,3 +15,8 @@ eureka:
   client:
     service-url:
       defaultZone:  http://localhost:8761/eureka
+springdoc:
+  api-docs:
+    path: /exchange/v3/api-docs
+  swagger-ui:
+    path: /exchange/swagger-ui
