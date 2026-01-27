@@ -40,4 +40,4 @@ springdoc:
     path: /book/v3/api-docs
   swagger-ui:
     path: /book/swagger-ui
-  override-server-url:
+  override-server-url: true
